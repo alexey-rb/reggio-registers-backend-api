@@ -21,7 +21,7 @@ api_version = "2026-01"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "write_metaobjects,write_products,write_app_proxy"
 
 [auth]
 redirect_urls = [
@@ -29,3 +29,8 @@ redirect_urls = [
   "https://reggio-registers-backend-api.fly.dev/auth/shopify/callback",
   "https://reggio-registers-backend-api.fly.dev/api/auth/callback"
 ]
+
+[app_proxy]
+url = "/proxy_route"
+subpath = "reggio-registers-backend-api"
+prefix = "apps"
