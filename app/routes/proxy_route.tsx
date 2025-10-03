@@ -19,8 +19,13 @@ import { useLoaderData } from "react-router";
 // };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+
+  console.log(">> loader proxy route called");
+
   // Use the authentication API from the Remix template
-  await authenticate.public.appProxy(request);
+  const { admin } = await authenticate.public.appProxy(request);
+
+  console.log(">> admin", admin);
 
   // Read URL parameters added by Shopify when proxying
   const url = new URL(request.url);
