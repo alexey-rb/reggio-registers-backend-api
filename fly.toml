@@ -1,0 +1,38 @@
+# fly.toml app configuration file generated for reggio-registers-backend-api on 2025-10-03T18:23:28+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'reggio-registers-backend-api'
+primary_region = 'iad'
+
+[build]
+
+[env]
+  PORT = '3000'
+  SCOPES = 'write_products'
+  SHOPIFY_API_KEY = 'fed8c28417a14ede3566fb8193455ed2'
+  SHOPIFY_APP_URL = 'https://reggio-registers-backend-api.fly.dev'
+
+[processes]
+  app = 'node ./dbsetup.js npm run docker-start'
+
+[[mounts]]
+  source = 'data'
+  destination = '/data'
+  auto_extend_size_threshold = 80
+  auto_extend_size_increment = '1GB'
+  auto_extend_size_limit = '10GB'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
